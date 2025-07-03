@@ -62,7 +62,7 @@ class VoiceAssistantPlugin {
         style.textContent = `
       .conv-ai-voice-assistant-container {
         position: fixed;
-        ${this.options.buttonPosition == 'bottom-right' ? `bottom: 20px; right: 20px;` : this.options.buttonPosition == 'top-right' ? `top: 20px; right: 20px;` : `bottom: 20px ; right: 20px;`}
+        ${this.options.buttonPosition == 'bottom-right' ? `bottom: 20px; right: 20px;` : this.options.buttonPosition == 'top-right' ? `top: 20px; right: 20px;` : `bottom: 20px; right: 20px;`}
         background: ${this.options.theme.backgroundColor};
         border-radius: 24px;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.23);
@@ -79,7 +79,7 @@ class VoiceAssistantPlugin {
 
       .conv-ai-voice-assistant-button {
         position: fixed;
-        ${this.options.buttonPosition == 'bottom-right' ? `bottom: 20px; right: 20px;` : this.options.buttonPosition == 'top-right' ? `top: 20px; right: 20px;` : `bottom: 20px ; right: 20px;`}
+        ${this.options.buttonPosition == 'bottom-right' ? `bottom: 20px; right: 20px;` : this.options.buttonPosition == 'top-right' ? `top: 20px; right: 20px;` : `bottom: 20px; right: 20px;`}
         background: ${this.options.theme.backgroundColor};
         border-radius: 28px;
         padding: 16px 8px 16px 16px;
@@ -182,7 +182,7 @@ class VoiceAssistantPlugin {
                 break;
             case 'listening':
                 this.messageBox.innerHTML = `
-                <div class="message-box-wrapper">
+                <div class="conv-ai-message-box-wrapper">
                     <button class="conv-ai-pill conv-ai-primary">Listening...</button>
                     <button class="conv-ai-pill conv-ai-red conv-ai-cursor-pointer" id="disconnect-button">
                         <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="conv-ai-icon" />
