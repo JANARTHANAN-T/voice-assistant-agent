@@ -1,3 +1,4 @@
+const CDN_PATH_PREFIX='https://cdn.jsdelivr.net/gh/JANARTHANAN-T/voice-assistant-agent@main'
 class VoiceAssistantPlugin {
     constructor(options = {}) {
         this.options = {
@@ -34,7 +35,7 @@ class VoiceAssistantPlugin {
         this.voiceAssistantButton = document.createElement('div');
         this.voiceAssistantButton.id = 'voice-assistant-button';
         this.voiceAssistantButton.className = 'voice-assistant-button';
-        this.voiceAssistantButton.innerHTML = `<img src="./phone.png" class="icon" /> <span>Let's Talk</span>`;
+        this.voiceAssistantButton.innerHTML = `<img src="${CDN_PATH_PREFIX}/phone.png" class="icon" /> <span>Let's Talk</span>`;
         this.voiceAssistantButton.addEventListener('click', () => this.handleButtonClick());
         document.body.appendChild(this.voiceAssistantButton);
 
@@ -45,7 +46,7 @@ class VoiceAssistantPlugin {
         this.container.style.display = 'none';
 
         this.avatar = document.createElement('img');
-        this.avatar.src = './image.png';
+        this.avatar.src = `${CDN_PATH_PREFIX}/image.png`;
         this.avatar.className = 'voice-assistant-avatar';
         this.container.appendChild(this.avatar);
 
@@ -184,7 +185,7 @@ class VoiceAssistantPlugin {
                 <div class="message-box-wrapper">
                     <button class="pill primary">Listening...</button>
                     <button class="pill red cursor-pointer" id="disconnect-button">
-                        <img src="./circle-stop.png" class="icon" />
+                        <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="icon" />
                     </button>
                 </div>`;
                 break;
@@ -193,14 +194,14 @@ class VoiceAssistantPlugin {
                 <div class="message-box-wrapper">
                     <button class="pill white">Thinking...</button>
                     <button class="pill red cursor-pointer" id="disconnect-button">
-                        <img src="./circle-stop.png" class="icon" />
+                        <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="icon" />
                     </button>
                 </div>`;
                 break;
             case 'speaking':
                 this.messageBox.innerHTML = `
                     <button class="pill red cursor-pointer" id="disconnect-button">
-                        <img src="./circle-stop.png" class="icon" /> Stop me
+                        <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="icon" /> Stop me
                     </button>`;
                 break;
         }
