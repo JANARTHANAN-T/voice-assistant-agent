@@ -34,24 +34,24 @@ class VoiceAssistantPlugin {
         // Floating button only
         this.voiceAssistantButton = document.createElement('div');
         this.voiceAssistantButton.id = 'voice-assistant-button';
-        this.voiceAssistantButton.className = 'voice-assistant-button';
-        this.voiceAssistantButton.innerHTML = `<img src="${CDN_PATH_PREFIX}/phone.png" class="icon" /> <span>Let's Talk</span>`;
+        this.voiceAssistantButton.className = 'conv-ai-voice-assistant-button';
+        this.voiceAssistantButton.innerHTML = `<img src="${CDN_PATH_PREFIX}/phone.png" class="conv-ai-icon" /> <span>Let's Talk</span>`;
         this.voiceAssistantButton.addEventListener('click', () => this.handleButtonClick());
         document.body.appendChild(this.voiceAssistantButton);
 
         // Container (initially hidden)
         this.container = document.createElement('div');
         this.container.id = 'voice-assistant-container';
-        this.container.className = 'voice-assistant-container';
+        this.container.className = 'conv-ai-voice-assistant-container';
         this.container.style.display = 'none';
 
         this.avatar = document.createElement('img');
         this.avatar.src = `${CDN_PATH_PREFIX}/image.png`;
-        this.avatar.className = 'voice-assistant-avatar';
+        this.avatar.className = 'conv-ai-voice-assistant-avatar';
         this.container.appendChild(this.avatar);
 
         this.messageBox = document.createElement('div');
-        this.messageBox.className = 'voice-assistant-message';
+        this.messageBox.className = 'conv-ai-voice-assistant-message';
         this.container.appendChild(this.messageBox);
 
         document.body.appendChild(this.container);
@@ -60,7 +60,7 @@ class VoiceAssistantPlugin {
     injectStyles() {
         const style = document.createElement('style');
         style.textContent = `
-      .voice-assistant-container {
+      .conv-ai-voice-assistant-container {
         position: fixed;
         ${this.options.buttonPosition == 'bottom-right' ? `bottom: 20px; right: 20px;` : this.options.buttonPosition == 'top-right' ? `top: 20px; right: 20px;` : `bottom: 20px ; right: 20px;`}
         background: ${this.options.theme.backgroundColor};
@@ -77,7 +77,7 @@ class VoiceAssistantPlugin {
         z-index: 9999;
       }
 
-      .voice-assistant-button {
+      .conv-ai-voice-assistant-button {
         position: fixed;
         ${this.options.buttonPosition == 'bottom-right' ? `bottom: 20px; right: 20px;` : this.options.buttonPosition == 'top-right' ? `top: 20px; right: 20px;` : `bottom: 20px ; right: 20px;`}
         background: ${this.options.theme.backgroundColor};
@@ -91,7 +91,7 @@ class VoiceAssistantPlugin {
         column-gap: 8px;
       }
 
-      .voice-assistant-button span {
+      .conv-ai-voice-assistant-button span {
         max-width: 0;
         opacity: 0;
         padding-right: 0;
@@ -100,24 +100,24 @@ class VoiceAssistantPlugin {
         transition: all 0.6s ease;
       }
 
-      .voice-assistant-button:hover span {
+      .conv-ai-voice-assistant-button:hover span {
         max-width: 120px; 
         padding-right: 8px;
         opacity: 1;
       }
 
-      .voice-assistant-avatar {
+      .conv-ai-voice-assistant-avatar {
         height: 80px;
         margin-bottom: 12px;
       }
 
-      .voice-assistant-message {
+      .conv-ai-voice-assistant-message {
         font-size: 14px;
         color: #111827;
         text-align: center;
       }
 
-      .pill {
+      .conv-ai-pill {
         padding: 6px 16px;
         border-radius: 9999px;
         font-size: 16px;
@@ -128,29 +128,29 @@ class VoiceAssistantPlugin {
         column-gap: 8px;
       }
 
-      .pill.red {
+      .conv-ai-pill.conv-ai-red {
         background-color: ${this.options.theme.secondaryColor};
         color: #D83C3C;
       }
 
-      .pill.white {
+      .conv-ai-pill.conv-ai-white {
         background-color: ${this.options.theme.secondaryColor};
       }
 
-      .pill.primary {
+      .conv-ai-pill.conv-ai-primary {
         background-color: ${this.options.theme.primaryColor};
         color: #FFF;
       }
 
-      .icon {
+      .conv-ai-icon {
         height: 24px;
       }
 
-      .cursor-pointer {
+      .conv-ai-cursor-pointer {
         cursor: pointer;
       }
 
-      .message-box-wrapper {
+      .conv-ai-message-box-wrapper {
         display: flex;
         align-item: center;
         column-gap: 8px
@@ -178,30 +178,30 @@ class VoiceAssistantPlugin {
             case 'initial':
                 break;
             case 'connecting':
-                this.messageBox.innerHTML = `<button class="pill primary">Connecting...</button>`;
+                this.messageBox.innerHTML = `<button class="conv-ai-pill conv-ai-primary">Connecting...</button>`;
                 break;
             case 'listening':
                 this.messageBox.innerHTML = `
                 <div class="message-box-wrapper">
-                    <button class="pill primary">Listening...</button>
-                    <button class="pill red cursor-pointer" id="disconnect-button">
-                        <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="icon" />
+                    <button class="conv-ai-pill conv-ai-primary">Listening...</button>
+                    <button class="conv-ai-pill conv-ai-red conv-ai-cursor-pointer" id="disconnect-button">
+                        <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="conv-ai-icon" />
                     </button>
                 </div>`;
                 break;
             case 'generating':
                 this.messageBox.innerHTML = `
-                <div class="message-box-wrapper">
-                    <button class="pill white">Thinking...</button>
-                    <button class="pill red cursor-pointer" id="disconnect-button">
-                        <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="icon" />
+                <div class="conv-ai-message-box-wrapper">
+                    <button class="conv-ai-pill conv-ai-white">Thinking...</button>
+                    <button class="conv-ai-pill conv-ai-red conv-ai-cursor-pointer" id="disconnect-button">
+                        <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="conv-ai-icon" />
                     </button>
                 </div>`;
                 break;
             case 'speaking':
                 this.messageBox.innerHTML = `
-                    <button class="pill red cursor-pointer" id="disconnect-button">
-                        <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="icon" /> Stop me
+                    <button class="conv-ai-pill conv-ai-red conv-ai-cursor-pointer" id="disconnect-button">
+                        <img src="${CDN_PATH_PREFIX}/circle-stop.png" class="conv-ai-icon" /> Stop me
                     </button>`;
                 break;
         }
