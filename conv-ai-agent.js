@@ -10,23 +10,17 @@
         textColor: '#1F2937'
       };
     
-      const defaultOptions = {
-        websocketUrl: 'ws://127.0.0.1:3000/api/v1/voice/call',
-        silenceTimeout: 60000,
-        buttonPosition: 'bottom-right',
-        agentId: '',
-        theme: defaultTheme
-      };
-    
       this.options = {
-        ...defaultOptions,
-        ...options,
+        websocketUrl: options.websocketUrl ?? 'ws://127.0.0.1:3000/api/v1/voice/call',
+        silenceTimeout: options.silenceTimeout ?? 60000,
+        buttonPosition: options.buttonPosition ?? 'bottom-right',
+        agentId: options.agentId ?? '',
         theme: {
           ...defaultTheme,
           ...(options.theme || {})
         }
       };
-
+      
       this.state = 'initial';
       this.websocket = null;
       this.silenceTimer = null;
