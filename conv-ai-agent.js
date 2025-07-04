@@ -3,21 +3,25 @@
   
   class ConvAIAgent {
     constructor(options = {}) {
+      const defaultTheme = {
+        primaryColor: '#2A59F1',
+        secondaryColor: '#FFF',
+        backgroundColor: '#EDF1FF',
+        textColor: '#1F2937'
+      };
+      
       this.options = {
         websocketUrl: options.websocketUrl || 'ws://127.0.0.1:3000/api/v1/voice/call',
         silenceTimeout: options.silenceTimeout || 60000,
         buttonPosition: options.buttonPosition || 'bottom-right',
         agentId: options.agentId || '',
+        ...options,
         theme: {
-          primaryColor: '#2A59F1',
-          secondaryColor: '#FFF',
-          backgroundColor: '#EDF1FF',
-          textColor: '#1F2937',
-          ...options.theme
-        },
-        ...options
+          ...defaultTheme,
+          ...(options.theme || {})
+        }
       };
-  
+
       this.state = 'initial';
       this.websocket = null;
       this.silenceTimer = null;
